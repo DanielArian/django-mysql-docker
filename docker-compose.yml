@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    container_name: mysql-container2
+    container_name: mysql-container
     image: mysql:8.0
     restart: always
     command: mysqld --default-authentication-plugin=mysql_native_password
@@ -19,7 +19,7 @@ services:
       - 3306:3306
 
   web:
-    container_name: django-web2
+    container_name: django-web
     build:
       context: ./app
       dockerfile: Dockerfile
