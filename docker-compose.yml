@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: mysql-container2
+    image: mysql:8.0
+    restart: always
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./mysql:/var/lib/mysql
+    env_file:
+      - ./.env.dev
+    environment:
+      - MYSQL_ROOT_PASSWORD=${SQL_ROOT_PASSWORD}
+      - MYSQL_USER=${SQL_USER}
+      - MYSQL_PASSWORD=${SQL_PASSWORD}
+      - MYSQL_DATABASE=${SQL_DATABASE}
+    ports:
+      - 3306:3306
+
+  web:
+    container_name: django-web2
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app/:/usr/src/app/
+    env_file:
+      - ./.env.dev
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    links:
+      - db
