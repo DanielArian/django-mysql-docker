@@ -22,4 +22,4 @@ SQL_HOST=db
 
 3. Create superuser : `docker exec -it django-web python manage.py createsuperuser`
 
-4. Visit `http://localhost:8000` or http://localhost:8000/admin`
+4. Visit `http://localhost:8000` or `http://localhost:8000/admin`
